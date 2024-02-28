@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import React, { ReactElement, MouseEvent } from "react";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { IconType } from "react-icons";
@@ -53,4 +54,8 @@ export type InputProps = {
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
+};
+
+export type HeaderProps = {
+  user?: User | null;
 };

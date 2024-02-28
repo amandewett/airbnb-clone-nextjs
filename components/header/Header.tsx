@@ -1,9 +1,10 @@
+import { HeaderProps } from "@/lib/appTypes";
 import Navbar from "./Navbar";
 
-const Header = () => {
+const Header = ({ user }: HeaderProps) => {
   return (
     <header>
-      <Navbar />
+      <Navbar user={user} />
     </header>
   );
 };

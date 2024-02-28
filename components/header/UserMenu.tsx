@@ -5,10 +5,16 @@ import Avatar from "../shared/Avatar";
 import { useCallback, useState } from "react";
 import UserMenuItem from "./UserMenuItem";
 import useRegistrationModal from "@/hooks/useRegistrationModal";
+import useLoginModal from "@/hooks/useLoginModal";
+import { HeaderProps } from "@/lib/appTypes";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-const UserMenu = () => {
+const UserMenu = ({ user }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const { onOpen } = useRegistrationModal();
+  const { onOpen: loginOnOpen } = useLoginModal();
+  const router = useRouter();
 
   const toggleMenu = useCallback(
     () => setIsMenuOpen((value) => !value),
@@ -38,8 +44,24 @@ const UserMenu = () => {
         <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
             <>
-              <UserMenuItem onClick={() => {}} label="Login" />
-              <UserMenuItem onClick={onOpen} label="Signup" />
+              {user ? (
+                <>
+                  <UserMenuItem
+                    onClick={() => {}}
+                    label={user.name || "User"}
+                  />
+                  <UserMenuItem onClick={() => {}} label="My trips" />
+                  <UserMenuItem
+                    onClick={() => signOut().then(() => router.refresh())}
+                    label="Logout"
+                  />
+                </>
+              ) : (
+                <>
+                  <UserMenuItem onClick={loginOnOpen} label="Login" />
+                  <UserMenuItem onClick={onOpen} label="Signup" />
+                </>
+              )}
             </>
           </div>
         </div>
