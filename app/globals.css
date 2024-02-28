@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --app-white: #F5F5F5;
+  --app-black: #252525;
+}
+
+body {
+  background-color: var(--app-white);
+  color: var(--app-black);
+}
