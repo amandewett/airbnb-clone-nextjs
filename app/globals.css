@@ -8,9 +8,12 @@
   margin: 0;
 }
 
+html,
+body,
 :root {
   --app-white: #F5F5F5;
   --app-black: #252525;
+  height: 100%;
 }
 
 body {
