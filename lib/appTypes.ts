@@ -57,5 +57,18 @@ export type InputProps = {
 };
 
 export type HeaderProps = {
-  user?: User | null;
+  user?: SafeUserProps | null;
+};
+
+export type SafeUserProps = Omit<
+  User,
+  "createdAt" | "updatedAt" | "emailVerified"
+> & {
+  createdAt: string;
+  updatedAt: string;
+  emailVerified: string | null;
+};
+
+export type AvatarProps = {
+  url?: string | null | undefined;
 };

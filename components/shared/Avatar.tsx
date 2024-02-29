@@ -1,6 +1,7 @@
+import { AvatarProps } from "@/lib/appTypes";
 import Image from "next/image";
 
-const Avatar = () => {
+const Avatar = ({ url }: AvatarProps) => {
   return (
     <>
       <Image
@@ -8,7 +9,7 @@ const Avatar = () => {
         height={30}
         width={30}
         alt="avatar"
-        src="/images/placeholder.jpg"
+        src={url ? url : "/images/placeholder.jpg"}
       />
     </>
   );

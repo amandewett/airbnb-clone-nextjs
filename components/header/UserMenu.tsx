@@ -36,12 +36,12 @@ const UserMenu = ({ user }: HeaderProps) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar />
+            <Avatar url={user?.image} />
           </div>
         </div>
       </div>
       {isMenuOpen && (
-        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
+        <div className="absolute overflow-hidden rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
             <>
               {user ? (
@@ -51,6 +51,11 @@ const UserMenu = ({ user }: HeaderProps) => {
                     label={user.name || "User"}
                   />
                   <UserMenuItem onClick={() => {}} label="My trips" />
+                  <UserMenuItem onClick={() => {}} label="My favorites" />
+                  <UserMenuItem onClick={() => {}} label="My reservations" />
+                  <UserMenuItem onClick={() => {}} label="My properties" />
+                  <UserMenuItem onClick={() => {}} label="Airbnb my home" />
+                  <hr />
                   <UserMenuItem
                     onClick={() => signOut().then(() => router.refresh())}
                     label="Logout"
