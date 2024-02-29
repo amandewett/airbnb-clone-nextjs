@@ -4,6 +4,7 @@ import Container from "../shared/Container";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
+import Categories from "./Categories";
 
 const Navbar = ({ user }: HeaderProps) => {
   return (
@@ -17,6 +18,7 @@ const Navbar = ({ user }: HeaderProps) => {
           </div>
         </Container>
       </div>
+      <Categories />
     </nav>
   );
 };

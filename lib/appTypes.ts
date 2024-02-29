@@ -72,3 +72,10 @@ export type SafeUserProps = Omit<
 export type AvatarProps = {
   url?: string | null | undefined;
 };
+
+export type CategoryBoxProps = {
+  label: string;
+  description: string;
+  icon: IconType;
+  selected?: boolean;
+};
