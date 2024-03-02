@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Modal from "./Modal";
 import Heading from "../shared/Heading";
 import toast from "react-hot-toast";
@@ -13,10 +13,13 @@ import CountrySelect from "../shared/inputs/CountrySelect";
 import dynamic from "next/dynamic";
 import Counter from "../shared/inputs/Counter";
 import ImageUpload from "../shared/inputs/ImageUpload";
+import Input from "../shared/inputs/Input";
+import axios from "axios";
 
 const RentModal = () => {
   const { isOpen, onClose, onOpen } = useRentModal();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(AIRBNB_STEPS.CATEGORY);
   const {
     register,
@@ -82,9 +85,19 @@ const RentModal = () => {
     return "Back";
   }, [currentStep]);
 
-  const submitHandler = async () => {
+  const submitHandler: SubmitHandler<FieldValues> = async (data) => {
+    if (currentStep !== AIRBNB_STEPS.PRICE) {
+      return onNext();
+    }
+
     setIsLoading(true);
     try {
+      const response = await axios.post("/api/listings", data);
+      toast.success("Listing created successfully!");
+      reset();
+      setCurrentStep(AIRBNB_STEPS.CATEGORY);
+      onClose();
+      router.refresh();
     } catch (e: any) {
       toast.error(e.message || "Something went wrong.");
     } finally {
@@ -176,6 +189,54 @@ const RentModal = () => {
     );
   }
 
+  if (currentStep === AIRBNB_STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="How would you describe your place?"
+          subTitle="Short and sweet works the best!"
+        />
+        <Input
+          id="title"
+          label="Title"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="description"
+          label="Description"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
+    );
+  }
+
+  if (currentStep === AIRBNB_STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Now, set your price"
+          subTitle="How much do you charge per night?"
+        />
+        <Input
+          id="price"
+          label="Price"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          type="number"
+          formatPrice
+          required
+        />
+      </div>
+    );
+  }
+
   return (
     <>
       <Modal
@@ -185,12 +246,11 @@ const RentModal = () => {
         actionLabel={actionLabel}
         secondaryActionLabel={secondaryActionLabel}
         onClose={onClose}
-        onSubmit={onNext}
+        onSubmit={handleSubmit(submitHandler)}
         secondaryAction={
           currentStep === AIRBNB_STEPS.CATEGORY ? undefined : onBack
         }
         body={bodyContent}
-        footer={<></>}
       />
     </>
   );
