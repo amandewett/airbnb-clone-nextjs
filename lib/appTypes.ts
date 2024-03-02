@@ -86,3 +86,32 @@ export type CategoryInputProps = {
   selected?: boolean;
   onClick: (value: string) => void;
 };
+
+export type CountrySelectProps = {
+  flag: string;
+  label: string;
+  latLng: number[];
+  region: string;
+  value: string;
+};
+
+export type CountryReactSelectProps = {
+  value?: CountrySelectProps;
+  onChange: (value: CountrySelectProps) => void;
+};
+
+export type MapProps = {
+  center?: number[];
+};
+
+export type CounterProps = {
+  title: string;
+  subTitle: string;
+  value: number;
+  onChange: (value: number) => void;
+};
+
+export type ImageUploadProps = {
+  onChange: (value: string) => void;
+  value: string;
+};

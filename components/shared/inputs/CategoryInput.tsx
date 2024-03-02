@@ -1,3 +1,4 @@
+"use client";
 import { CategoryInputProps } from "@/lib/appTypes";
 
 const CategoryInput = ({

@@ -11,7 +11,7 @@ import RentModal from "@/components/modals/RentModal";
 const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AirBnb Clone",
+  title: "Airbnb Clone",
   description: "AirBnb clone with NextJS",
 };
 

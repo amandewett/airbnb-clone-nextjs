@@ -1,26 +1,21 @@
 "use client";
-import axios from "axios";
-import { AiFillGithub } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
-import { useCallback, useMemo, useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useMemo, useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
 import Modal from "./Modal";
 import Heading from "../shared/Heading";
-import Input from "../shared/inputs/Input";
 import toast from "react-hot-toast";
-import Button from "../shared/Button";
-import useLoginModal from "@/hooks/useLoginModal";
-import { signIn } from "next-auth/react";
-import useRegistrationModal from "@/hooks/useRegistrationModal";
 import { useRouter } from "next/navigation";
 import useRentModal from "@/hooks/useRentModal";
 import { AIRBNB_STEPS } from "@/lib/enums";
 import { CATEGORIES } from "@/utils/categories";
 import CategoryInput from "../shared/inputs/CategoryInput";
+import CountrySelect from "../shared/inputs/CountrySelect";
+import dynamic from "next/dynamic";
+import Counter from "../shared/inputs/Counter";
+import ImageUpload from "../shared/inputs/ImageUpload";
 
 const RentModal = () => {
   const { isOpen, onClose, onOpen } = useRentModal();
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(AIRBNB_STEPS.CATEGORY);
   const {
@@ -45,6 +40,16 @@ const RentModal = () => {
   });
 
   const selectedCategory = watch("category");
+  const selectedLocation = watch("location");
+  const selectedGuestCount = watch("guestCount");
+  const selectedRoomCount = watch("roomCount");
+  const selectedBathroomCount = watch("bathroomCount");
+  const selectedImageSrc = watch("imageSrc");
+
+  const Map = useMemo(
+    () => dynamic(() => import("@/components/shared/Map"), { ssr: false }),
+    [selectedLocation]
+  );
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -55,10 +60,10 @@ const RentModal = () => {
 
   const onBack = () =>
     setCurrentStep((value: number) =>
-      value === AIRBNB_STEPS.CATEGORY ? AIRBNB_STEPS.CATEGORY : value + 1
+      value === AIRBNB_STEPS.CATEGORY ? AIRBNB_STEPS.CATEGORY : value - 1
     );
 
-  const onForward = () =>
+  const onNext = () =>
     setCurrentStep((value: number) =>
       value === AIRBNB_STEPS.PRICE ? AIRBNB_STEPS.PRICE : value + 1
     );
@@ -68,14 +73,14 @@ const RentModal = () => {
       return "Create";
     }
     return "Next";
-  }, []);
+  }, [currentStep]);
 
   const secondaryActionLabel = useMemo(() => {
     if (currentStep === AIRBNB_STEPS.CATEGORY) {
       return undefined;
     }
     return "Back";
-  }, []);
+  }, [currentStep]);
 
   const submitHandler = async () => {
     setIsLoading(true);
@@ -109,6 +114,68 @@ const RentModal = () => {
     </div>
   );
 
+  if (currentStep === AIRBNB_STEPS.LOCATION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your place located?"
+          subTitle="Help guests find you!"
+        />
+        <CountrySelect
+          value={selectedLocation}
+          onChange={(value) => setCustomValue("location", value)}
+        />
+        <Map center={selectedLocation?.latLng} />
+      </div>
+    );
+  }
+
+  if (currentStep === AIRBNB_STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Share some basics about your place"
+          subTitle="What amenities do you have?"
+        />
+        <Counter
+          title="Number of guests"
+          subTitle="How many guests?"
+          value={selectedGuestCount}
+          onChange={(value) => setCustomValue("guestCount", value)}
+        />
+        <hr />
+        <Counter
+          title="Rooms"
+          subTitle="How many rooms do you have?"
+          value={selectedRoomCount}
+          onChange={(value) => setCustomValue("roomCount", value)}
+        />
+        <hr />
+        <Counter
+          title="Bathrooms"
+          subTitle="How many bathrooms do you have?"
+          value={selectedBathroomCount}
+          onChange={(value) => setCustomValue("bathroomCount", value)}
+        />
+      </div>
+    );
+  }
+
+  if (currentStep === AIRBNB_STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your place"
+          subTitle="Show guests what your place looks like!"
+        />
+        <ImageUpload
+          onChange={(value) => setCustomValue("imageSrc", value)}
+          value={selectedImageSrc}
+        />
+      </div>
+    );
+  }
+
   return (
     <>
       <Modal
@@ -118,7 +185,7 @@ const RentModal = () => {
         actionLabel={actionLabel}
         secondaryActionLabel={secondaryActionLabel}
         onClose={onClose}
-        onSubmit={submitHandler}
+        onSubmit={onNext}
         secondaryAction={
           currentStep === AIRBNB_STEPS.CATEGORY ? undefined : onBack
         }
