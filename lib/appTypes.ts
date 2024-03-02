@@ -79,3 +79,10 @@ export type CategoryBoxProps = {
   icon: IconType;
   selected?: boolean;
 };
+
+export type CategoryInputProps = {
+  icon: IconType;
+  label: string;
+  selected?: boolean;
+  onClick: (value: string) => void;
+};
