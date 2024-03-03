@@ -34,7 +34,6 @@ const useFavorite = ({ listingId, currentUser }: FavoriteHookProps) => {
 
         await request();
         router.refresh();
-        toast.success("Success");
       } catch (e) {
         toast.error("Something went wrong");
       }

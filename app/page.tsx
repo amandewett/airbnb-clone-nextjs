@@ -1,12 +1,16 @@
 import { getCurrentUser } from "@/actions/getCurrentUser";
-import getListing from "@/actions/getListings";
+import getListings from "@/actions/getListings";
 import ListingCard from "@/components/listing/ListingCard";
 import Container from "@/components/shared/Container";
 import EmptyState from "@/components/shared/EmptyState";
-import { ListingItemProps } from "@/lib/appTypes";
+import { GetListingsActionProps, ListingItemProps } from "@/lib/appTypes";
 
-const HomePage = async () => {
-  const listings: any = await getListing();
+type HomeProps = {
+  searchParams: GetListingsActionProps;
+};
+
+const HomePage = async ({ searchParams }: HomeProps) => {
+  const listings: any = await getListings(searchParams);
   const currentUser = await getCurrentUser();
   const isEmpty = listings.length === 0;
 

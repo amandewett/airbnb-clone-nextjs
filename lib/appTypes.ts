@@ -234,3 +234,19 @@ export type FavoritesClientProps = {
   listings: Listing[];
   currentUser?: SafeUserProps | null;
 };
+
+export type GetListingsActionProps = {
+  userId?: string;
+  guestCount?: number;
+  roomCount?: number;
+  bathroomCount?: number;
+  startDate?: string;
+  endDate?: string;
+  locationValue?: string;
+  category?: string;
+};
+
+export type PropertiesClientProps = {
+  listings: Listing[];
+  currentUser?: SafeUserProps | null;
+};

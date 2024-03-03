@@ -60,18 +60,33 @@ const UserMenu = ({ user }: HeaderProps) => {
                     label={user.name || "User"}
                   />
                   <UserMenuItem
-                    onClick={() => router.push("/trips")}
+                    onClick={() => {
+                      router.push("/trips");
+                      toggleMenu();
+                    }}
                     label="My trips"
                   />
                   <UserMenuItem
-                    onClick={() => router.push("/favorites")}
+                    onClick={() => {
+                      router.push("/favorites");
+                      toggleMenu();
+                    }}
                     label="My favorites"
                   />
                   <UserMenuItem
-                    onClick={() => router.push("/reservations")}
+                    onClick={() => {
+                      router.push("/reservations");
+                      toggleMenu();
+                    }}
                     label="My reservations"
                   />
-                  <UserMenuItem onClick={() => {}} label="My properties" />
+                  <UserMenuItem
+                    onClick={() => {
+                      router.push("/properties");
+                      toggleMenu();
+                    }}
+                    label="My properties"
+                  />
                   <UserMenuItem
                     onClick={() => {
                       rentModal.onOpen();
