@@ -18,10 +18,7 @@ const UserMenu = ({ user }: HeaderProps) => {
   const rentModal = useRentModal();
   const router = useRouter();
 
-  const toggleMenu = useCallback(
-    () => setIsMenuOpen((value) => !value),
-    [isMenuOpen]
-  );
+  const toggleMenu = useCallback(() => setIsMenuOpen((value) => !value), []);
 
   const onRent = useCallback(() => {
     if (!user) {

@@ -12,13 +12,19 @@ export async function DELETE(
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return Response.error();
+    return Response.json({
+      status: false,
+      message: "Something went wrong",
+    });
   }
 
   const { reservationId } = params;
 
   if (!reservationId || typeof reservationId !== "string") {
-    throw new Error("Invalid ID");
+    return Response.json({
+      status: false,
+      message: "Something went wrong",
+    });
   }
 
   const reservation = await prisma.reservation.deleteMany({

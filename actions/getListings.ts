@@ -74,8 +74,7 @@ const getListings = ({
       resolve(listings);
     } catch (e: any) {
       console.log(e);
-      toast.error(e.message || "Something went wrong");
-      reject(e);
+      resolve([]);
     }
   });
 };

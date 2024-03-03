@@ -256,3 +256,7 @@ export type UseSearchModalProps = {
   onOpen: () => void;
   onClose: () => void;
 };
+
+export type ErrorPageProps = {
+  error: Error;
+};

@@ -102,7 +102,7 @@ const LoginModal = () => {
             />
             <div className="text-neutral-500 text-center mt-4 font-light">
               <div className="flex justify-center flex-row items-center gap-2">
-                <div>Don't have an account?</div>
+                <div>Don&apos;t have an account?</div>
                 <div
                   onClick={() => {
                     loginModal.onClose();

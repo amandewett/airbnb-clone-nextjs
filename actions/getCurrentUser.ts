@@ -28,7 +28,6 @@ export const getCurrentUser = async () => {
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
   } catch (e: any) {
-    toast.error(e.message || "Something went wrong");
     return null;
   }
 };

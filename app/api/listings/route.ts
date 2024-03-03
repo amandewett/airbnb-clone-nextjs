@@ -17,13 +17,19 @@ export const POST = async (req: Request) => {
 
   const currentUser = await getCurrentUser();
   if (!currentUser) {
-    throw new Error("Unauthorized");
+    return Response.json({
+      status: false,
+      message: "Something went wrong",
+    });
   }
 
   //validation
   Object.keys(body).forEach((value) => {
     if (!body[value]) {
-      throw new Error("Invalid request");
+      return Response.json({
+        status: false,
+        message: "Something went wrong",
+      });
     }
   });
 

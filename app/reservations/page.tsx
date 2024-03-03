@@ -3,6 +3,7 @@ import getReservations from "@/actions/getReservations";
 import ReservationsClient from "@/components/reservations/ReservationsClient";
 import EmptyState from "@/components/shared/EmptyState";
 import TripsClient from "@/components/trips/TripsClient";
+import { Suspense } from "react";
 
 const ReservationsPage = async () => {
   const currentUser = await getCurrentUser();
@@ -15,15 +16,22 @@ const ReservationsPage = async () => {
 
   if (reservations.length === 0) {
     return (
-      <EmptyState
-        title="No reservations found"
-        subTitle="Looks like you have no reservations on your properties."
-      />
+      <Suspense>
+        <EmptyState
+          title="No reservations found"
+          subTitle="Looks like you have no reservations on your properties."
+        />
+      </Suspense>
     );
   }
 
   return (
-    <ReservationsClient reservations={reservations} currentUser={currentUser} />
+    <Suspense>
+      <ReservationsClient
+        reservations={reservations}
+        currentUser={currentUser}
+      />
+    </Suspense>
   );
 };
 export default ReservationsPage;

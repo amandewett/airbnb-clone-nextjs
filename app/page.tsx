@@ -4,6 +4,7 @@ import ListingCard from "@/components/listing/ListingCard";
 import Container from "@/components/shared/Container";
 import EmptyState from "@/components/shared/EmptyState";
 import { GetListingsActionProps, ListingItemProps } from "@/lib/appTypes";
+import { Suspense } from "react";
 
 type HomeProps = {
   searchParams: GetListingsActionProps;
@@ -20,19 +21,21 @@ const HomePage = async ({ searchParams }: HomeProps) => {
 
   return (
     <>
-      <Container>
-        <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-          {listings.map((listing: ListingItemProps) => {
-            return (
-              <ListingCard
-                key={listing.id}
-                listingData={listing}
-                currentUser={currentUser}
-              />
-            );
-          })}
-        </div>
-      </Container>
+      <Suspense>
+        <Container>
+          <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+            {listings.map((listing: ListingItemProps) => {
+              return (
+                <ListingCard
+                  key={listing.id}
+                  listingData={listing}
+                  currentUser={currentUser}
+                />
+              );
+            })}
+          </div>
+        </Container>
+      </Suspense>
     </>
   );
 };

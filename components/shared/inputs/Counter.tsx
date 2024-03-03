@@ -7,7 +7,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 const Counter = ({ onChange, subTitle, title, value }: CounterProps) => {
   const handleAdd = useCallback(() => {
     onChange(value + 1);
-  }, [onChange]);
+  }, [onChange, value]);
 
   const handleReduce = useCallback(() => {
     if (value === 1) {

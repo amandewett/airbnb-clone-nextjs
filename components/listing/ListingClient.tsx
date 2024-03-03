@@ -12,7 +12,11 @@ import ListingHeader from "./ListingHeader";
 import ListingInfo from "./ListingInfo";
 import useLoginModal from "@/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
-import { differenceInCalendarDays, differenceInDays, eachDayOfInterval } from "date-fns";
+import {
+  differenceInCalendarDays,
+  differenceInDays,
+  eachDayOfInterval,
+} from "date-fns";
 import { Range } from "react-date-range";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -51,7 +55,7 @@ const ListingClient = ({
     return CATEGORIES.find(
       (category) => category.label === listingData.category
     );
-  }, [CATEGORIES, listingData.category]);
+  }, [listingData.category]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listingData.price);
@@ -85,7 +89,10 @@ const ListingClient = ({
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
-      const dayCount = differenceInCalendarDays(dateRange.endDate, dateRange.startDate);
+      const dayCount = differenceInCalendarDays(
+        dateRange.endDate,
+        dateRange.startDate
+      );
 
       if (dayCount && listingData.price) {
         setTotalPrice(dayCount * listingData.price);

@@ -36,7 +36,7 @@ const SearchModal = () => {
       dynamic(() => import("@/components/shared/Map"), {
         ssr: false,
       }),
-    [location]
+    []
   );
 
   const onBack = useCallback(() => {

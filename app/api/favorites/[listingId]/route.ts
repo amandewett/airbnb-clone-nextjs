@@ -9,13 +9,19 @@ export const PUT = async (req: Request, { params }: { params: Params }) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return Response.error();
+    return Response.json({
+      status: false,
+      message: `Unauthorized`,
+    });
   }
 
   const { listingId } = params;
 
   if (!listingId || typeof listingId !== "string") {
-    throw new Error("Invalid listing ID");
+    return Response.json({
+      status: false,
+      message: "Invalid listing Id",
+    });
   }
 
   let favoriteIds = [...(currentUser.favoriteIds || [])];
@@ -43,13 +49,19 @@ export const DELETE = async (req: Request, { params }: { params: Params }) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return Response.error();
+    return Response.json({
+      status: false,
+      message: "Something went wrong",
+    });
   }
 
   const { listingId } = params;
 
   if (!listingId || typeof listingId !== "string") {
-    throw new Error("Invalid listing ID");
+    return Response.json({
+      status: false,
+      message: "Something went wrong",
+    });
   }
 
   let favoriteIds = [...(currentUser.favoriteIds || [])];

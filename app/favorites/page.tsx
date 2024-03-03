@@ -2,6 +2,7 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import getFavoriteListings from "@/actions/getFavoriteListings";
 import FavoritesClient from "@/components/favorites/FavoritesClient";
 import EmptyState from "@/components/shared/EmptyState";
+import { Suspense } from "react";
 
 const FavoritesPage = async () => {
   const listings = await getFavoriteListings();
@@ -16,6 +17,10 @@ const FavoritesPage = async () => {
     );
   }
 
-  return <FavoritesClient listings={listings} currentUser={currentUser} />;
+  return (
+    <Suspense>
+      <FavoritesClient listings={listings} currentUser={currentUser} />
+    </Suspense>
+  );
 };
 export default FavoritesPage;
