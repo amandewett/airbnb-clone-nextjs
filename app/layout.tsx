@@ -21,7 +21,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const currentUser = await getCurrentUser();
-  // const currentUser = null;
   return (
     <html lang="en">
       <body className={nunito.className}>

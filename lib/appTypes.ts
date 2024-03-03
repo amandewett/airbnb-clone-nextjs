@@ -224,3 +224,13 @@ export type TripsClientProps = {
   reservations: Reservation[];
   currentUser?: SafeUserProps | null;
 };
+
+export type ReservationsClientProps = {
+  reservations: Reservation[];
+  currentUser?: SafeUserProps | null;
+};
+
+export type FavoritesClientProps = {
+  listings: Listing[];
+  currentUser?: SafeUserProps | null;
+};

@@ -63,8 +63,14 @@ const UserMenu = ({ user }: HeaderProps) => {
                     onClick={() => router.push("/trips")}
                     label="My trips"
                   />
-                  <UserMenuItem onClick={() => {}} label="My favorites" />
-                  <UserMenuItem onClick={() => {}} label="My reservations" />
+                  <UserMenuItem
+                    onClick={() => router.push("/favorites")}
+                    label="My favorites"
+                  />
+                  <UserMenuItem
+                    onClick={() => router.push("/reservations")}
+                    label="My reservations"
+                  />
                   <UserMenuItem onClick={() => {}} label="My properties" />
                   <UserMenuItem
                     onClick={() => {

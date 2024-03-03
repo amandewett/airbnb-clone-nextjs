@@ -38,6 +38,7 @@ const RegistrationModal = () => {
         reset();
         toast.success("User registered successfully.");
         registerModal.onClose();
+        loginModal.onOpen();
       }
     } catch (e: any) {
       toast.error(e.message || "Something went wrong.");
