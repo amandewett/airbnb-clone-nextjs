@@ -219,3 +219,8 @@ export type getReservationsProps = {
   userId?: string;
   authorId?: string;
 };
+
+export type TripsClientProps = {
+  reservations: Reservation[];
+  currentUser?: SafeUserProps | null;
+};
