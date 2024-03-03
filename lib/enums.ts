@@ -6,3 +6,9 @@ export enum AIRBNB_STEPS {
   DESCRIPTION = 4,
   PRICE = 5,
 }
+
+export enum SEARCH_STEPS {
+  LOCATION = 0,
+  DATE = 1,
+  INFO = 2,
+}

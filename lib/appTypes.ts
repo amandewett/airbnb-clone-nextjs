@@ -250,3 +250,9 @@ export type PropertiesClientProps = {
   listings: Listing[];
   currentUser?: SafeUserProps | null;
 };
+
+export type UseSearchModalProps = {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+};
