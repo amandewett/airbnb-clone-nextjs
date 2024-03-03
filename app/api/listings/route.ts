@@ -42,8 +42,11 @@ export const POST = async (req: Request) => {
     },
   });
 
-  return Response.json({
-    status: true,
-    message: `Listing created successfully`,
-  });
+  return Response.json(
+    {
+      status: true,
+      message: `Listing created successfully`,
+    },
+    { status: 200 }
+  );
 };

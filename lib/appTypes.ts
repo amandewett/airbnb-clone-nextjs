@@ -1,5 +1,6 @@
-import { User } from "@prisma/client";
+import { Listing, Reservation, User } from "@prisma/client";
 import React, { ReactElement, MouseEvent } from "react";
+import { RangeKeyDict, Range } from "react-date-range";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { IconType } from "react-icons";
 
@@ -40,7 +41,7 @@ export type RegistrationModalStoreProps = {
 };
 
 export type HeadingProps = {
-  title: string;
+  title?: string;
   subTitle?: string;
   center?: boolean;
 };
@@ -114,4 +115,107 @@ export type CounterProps = {
 export type ImageUploadProps = {
   onChange: (value: string) => void;
   value: string;
+};
+
+export type EmptyStateProps = {
+  title?: string;
+  subTitle?: string;
+  showReset?: boolean;
+};
+
+export type ListingItemProps = {
+  id: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+  category: string;
+  roomCount: number;
+  bathroomCount: number;
+  guestCount: number;
+  locationValue: string;
+  userId: string;
+  price: number;
+};
+
+export type ListingCardProps = {
+  listingData: ListingItemProps;
+  reservation?: Reservation;
+  onAction?: (id: string) => void;
+  disabled?: boolean;
+  actionLabel?: string;
+  actionId?: string;
+  currentUser?: SafeUserProps | null;
+};
+
+export type HeartButtonProps = {
+  listingId: string;
+  currentUser?: SafeUserProps | null;
+};
+
+export type FavoriteHookProps = {
+  listingId: string;
+  currentUser?: SafeUserProps | null;
+};
+
+export type ListingDetailsPageProps = {
+  params: {
+    listingId: string;
+  };
+  searchParams: any;
+};
+
+export type ListingClientProps = {
+  listingData: Listing;
+  reservations?: Reservation[];
+  currentUser?: SafeUserProps | null;
+};
+
+export type ListingHeaderProps = {
+  title: string;
+  imageSrc: string;
+  locationValue: string;
+  id: string;
+  currentUser?: SafeUserProps | null;
+};
+
+export type ListingInfoProps = {
+  user?: SafeUserProps | null;
+  category: {
+    icon: IconType;
+    label: string;
+    description: string;
+  };
+  description: string;
+  roomCount: number;
+  guestCount: number;
+  bathroomCount: number;
+  locationValue: string;
+};
+
+export type ListingCategoryProps = {
+  icon: IconType;
+  label: string;
+  description: string;
+};
+
+export type CalendarProps = {
+  value: Range;
+  onChange: (value: RangeKeyDict) => void;
+  disabledDates?: Date[];
+};
+
+export type ListingReservationProps = {
+  price: number;
+  dateRange: Range;
+  totalPrice: number;
+  onChangeDate: (value: Range) => void;
+  onSubmit: () => void;
+  disabled?: boolean;
+  disabledDates: Date[];
+};
+
+export type getReservationsProps = {
+  listingId?: string;
+  userId?: string;
+  authorId?: string;
 };
