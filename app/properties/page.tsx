@@ -2,7 +2,6 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import getListings from "@/actions/getListings";
 import PropertiesClient from "@/components/properties/PropertiesClient";
 import EmptyState from "@/components/shared/EmptyState";
-import { Suspense } from "react";
 
 const PropertiesPage = async () => {
   const currentUser = await getCurrentUser();
@@ -13,21 +12,15 @@ const PropertiesPage = async () => {
 
   const listings: any = await getListings({ userId: currentUser.id });
 
-  if (listings.length === 0) {
+  if (!listings || listings.length === 0) {
     return (
-      <Suspense>
-        <EmptyState
-          title="No properties found"
-          subTitle="Looks like you have no properties."
-        />
-      </Suspense>
+      <EmptyState
+        title="No properties found"
+        subTitle="Looks like you have no properties."
+      />
     );
   }
 
-  return (
-    <Suspense>
-      <PropertiesClient listings={listings} currentUser={currentUser} />
-    </Suspense>
-  );
+  return <PropertiesClient listings={listings} currentUser={currentUser} />;
 };
 export default PropertiesPage;

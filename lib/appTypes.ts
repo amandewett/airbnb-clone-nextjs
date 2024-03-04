@@ -260,3 +260,7 @@ export type UseSearchModalProps = {
 export type ErrorPageProps = {
   error: Error;
 };
+
+export type HomeProps = {
+  searchParams: GetListingsActionProps;
+};

@@ -7,7 +7,7 @@ const FavoritesPage = async () => {
   const listings: any = await getFavoriteListings();
   const currentUser = await getCurrentUser();
 
-  if (listings && listings.length === 0) {
+  if (!listings || listings.length === 0) {
     return (
       <EmptyState
         title="No favorites found"
