@@ -15,11 +15,11 @@ const Categories = () => {
   }
 
   return (
-    <Suspense>
-      <Container>
-        <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
-          {CATEGORIES.map((category) => {
-            return (
+    <Container>
+      <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
+        {CATEGORIES.map((category) => {
+          return (
+            <Suspense>
               <CategoryBox
                 key={category.label}
                 label={category.label}
@@ -27,11 +27,11 @@ const Categories = () => {
                 icon={category.icon}
                 selected={categoryParam === category.label}
               />
-            );
-          })}
-        </div>
-      </Container>
-    </Suspense>
+            </Suspense>
+          );
+        })}
+      </div>
+    </Container>
   );
 };
 export default Categories;
