@@ -6,7 +6,10 @@ import ListingCard from "../listing/ListingCard";
 const FavoritesClient = ({ listings, currentUser }: FavoritesClientProps) => {
   return (
     <Container>
-      <Heading title="Favorites" subTitle="List of places you favorited!" />
+      <Heading
+        title="Favorites"
+        subTitle="List of places you marked favorites!"
+      />
       <div
         className="
               mt-10
