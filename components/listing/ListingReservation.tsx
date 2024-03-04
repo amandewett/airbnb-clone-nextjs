@@ -1,6 +1,4 @@
 "use client";
-import { Range } from "react-date-range";
-
 import Button from "@/components/shared/Button";
 import Calendar from "@/components/shared/inputs/Calendar";
 import { ListingReservationProps } from "@/lib/appTypes";

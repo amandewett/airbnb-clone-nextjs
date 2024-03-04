@@ -8,7 +8,7 @@ import { ListingDetailsPageProps } from "@/lib/appTypes";
 const ListingDetailsPage = async ({ params }: ListingDetailsPageProps) => {
   const listing: any = await getListingById({ listingId: params.listingId });
   const currentUser = await getCurrentUser();
-  const reservations = await getReservations(params);
+  const reservations: any = await getReservations(params);
 
   if (!listing) {
     return <EmptyState />;
