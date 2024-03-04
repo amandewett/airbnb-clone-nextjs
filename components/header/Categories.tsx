@@ -19,9 +19,8 @@ const Categories = () => {
       <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
         {CATEGORIES.map((category) => {
           return (
-            <Suspense>
+            <Suspense key={category.label}>
               <CategoryBox
-                key={category.label}
                 label={category.label}
                 description={category.description}
                 icon={category.icon}
