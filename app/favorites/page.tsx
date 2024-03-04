@@ -5,10 +5,10 @@ import EmptyState from "@/components/shared/EmptyState";
 import { Suspense } from "react";
 
 const FavoritesPage = async () => {
-  const listings = await getFavoriteListings();
+  const listings: any = await getFavoriteListings();
   const currentUser = await getCurrentUser();
 
-  if (listings.length === 0) {
+  if (listings && listings.length === 0) {
     return (
       <EmptyState
         title="No favorites found"

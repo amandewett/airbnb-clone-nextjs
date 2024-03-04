@@ -28,6 +28,7 @@ export const getCurrentUser = async () => {
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
   } catch (e: any) {
+    console.log(e);
     return null;
   }
 };

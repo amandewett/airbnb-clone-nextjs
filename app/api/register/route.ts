@@ -13,5 +13,7 @@ export const POST = async (req: Request) => {
       password: hashedPassword,
     },
   });
-  return Response.json(user);
+  return Response.json(user, {
+    status: 200,
+  });
 };

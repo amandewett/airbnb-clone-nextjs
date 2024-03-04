@@ -74,7 +74,7 @@ const getListings = ({
       resolve(listings);
     } catch (e: any) {
       console.log(e);
-      resolve([]);
+      resolve(null);
     }
   });
 };

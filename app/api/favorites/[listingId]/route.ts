@@ -9,19 +9,27 @@ export const PUT = async (req: Request, { params }: { params: Params }) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return Response.json({
-      status: false,
-      message: `Unauthorized`,
-    });
+    return Response.json(
+      {
+        status: false,
+        message: `Unauthorized`,
+      },
+      {
+        status: 401,
+      }
+    );
   }
 
   const { listingId } = params;
 
   if (!listingId || typeof listingId !== "string") {
-    return Response.json({
-      status: false,
-      message: "Invalid listing Id",
-    });
+    return Response.json(
+      {
+        status: false,
+        message: "Invalid parameters",
+      },
+      { status: 400 }
+    );
   }
 
   let favoriteIds = [...(currentUser.favoriteIds || [])];
@@ -49,25 +57,33 @@ export const DELETE = async (req: Request, { params }: { params: Params }) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return Response.json({
-      status: false,
-      message: "Something went wrong",
-    });
+    return Response.json(
+      {
+        status: false,
+        message: "Unauthorized",
+      },
+      { status: 401 }
+    );
   }
 
   const { listingId } = params;
 
   if (!listingId || typeof listingId !== "string") {
-    return Response.json({
-      status: false,
-      message: "Something went wrong",
-    });
+    return Response.json(
+      {
+        status: false,
+        message: "Invalid parameters",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   let favoriteIds = [...(currentUser.favoriteIds || [])];
   favoriteIds = favoriteIds.filter((id) => id !== listingId);
 
-  const user = await prismaClient.user.update({
+  await prismaClient.user.update({
     where: {
       id: currentUser.id,
     },

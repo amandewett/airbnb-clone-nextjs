@@ -31,6 +31,6 @@ export default async function getReservations(params: getReservationsProps) {
 
     return reservations;
   } catch (error: any) {
-    return [];
+    return null;
   }
 }

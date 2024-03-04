@@ -17,23 +17,29 @@ export const POST = async (req: Request) => {
 
   const currentUser = await getCurrentUser();
   if (!currentUser) {
-    return Response.json({
-      status: false,
-      message: "Something went wrong",
-    });
+    return Response.json(
+      {
+        status: false,
+        message: "Unauthorized",
+      },
+      { status: 401 }
+    );
   }
 
   //validation
   Object.keys(body).forEach((value) => {
     if (!body[value]) {
-      return Response.json({
-        status: false,
-        message: "Something went wrong",
-      });
+      return Response.json(
+        {
+          status: false,
+          message: "Invalid params",
+        },
+        { status: 400 }
+      );
     }
   });
 
-  const listing = await prismaClient.listing.create({
+  await prismaClient.listing.create({
     data: {
       category,
       locationValue: location.value,

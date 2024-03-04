@@ -5,20 +5,26 @@ export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return Response.json({
-      status: false,
-      message: "Something went wrong",
-    });
+    return Response.json(
+      {
+        status: false,
+        message: "Unauthorized",
+      },
+      { status: 401 }
+    );
   }
 
   const body = await request.json();
   const { listingId, startDate, endDate, totalPrice } = body;
 
   if (!listingId || !startDate || !endDate || !totalPrice) {
-    return Response.json({
-      status: false,
-      message: "Something went wrong",
-    });
+    return Response.json(
+      {
+        status: false,
+        message: "Invalid params",
+      },
+      { status: 400 }
+    );
   }
 
   const listingAndReservation = await prisma.listing.update({
@@ -37,5 +43,5 @@ export async function POST(request: Request) {
     },
   });
 
-  return Response.json(listingAndReservation);
+  return Response.json(listingAndReservation, { status: 200 });
 }

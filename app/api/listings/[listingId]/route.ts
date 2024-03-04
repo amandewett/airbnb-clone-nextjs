@@ -12,19 +12,25 @@ export async function DELETE(
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return Response.json({
-      status: false,
-      message: "Something went wrong",
-    });
+    return Response.json(
+      {
+        status: false,
+        message: "Unauthorized",
+      },
+      { status: 401 }
+    );
   }
 
   const { listingId } = params;
 
   if (!listingId || typeof listingId !== "string") {
-    return Response.json({
-      status: false,
-      message: "Something went wrong",
-    });
+    return Response.json(
+      {
+        status: false,
+        message: "Invalid params",
+      },
+      { status: 400 }
+    );
   }
 
   const listing = await prisma.listing.deleteMany({
@@ -34,5 +40,5 @@ export async function DELETE(
     },
   });
 
-  return Response.json(listing);
+  return Response.json(listing, { status: 200 });
 }
