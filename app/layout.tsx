@@ -14,8 +14,8 @@ import { Suspense } from "react";
 const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Airbnb Clone",
-  description: "AirBnb clone with NextJS",
+  title: "WaterBnb Clone",
+  description: "WaterBnb clone with NextJS",
 };
 
 export default async function RootLayout({

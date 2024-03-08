@@ -58,7 +58,10 @@ const RegistrationModal = () => {
         onSubmit={handleSubmit(submitHandler)}
         body={
           <div className="flex flex-col gap-4">
-            <Heading title="Welcome to Airbnb" subTitle="Create an account!" />
+            <Heading
+              title="Welcome to WaterBnb"
+              subTitle="Create an account!"
+            />
             <Input
               id="email"
               label="Email"

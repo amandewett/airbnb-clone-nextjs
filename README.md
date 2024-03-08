@@ -1,4 +1,4 @@
-# This is a [Next.js](https://nextjs.org/) 13 AirBnb Clone project.
+# This is a [Next.js](https://nextjs.org/) 13 WaterBnb Clone project.
 
 ## Technologies
 
